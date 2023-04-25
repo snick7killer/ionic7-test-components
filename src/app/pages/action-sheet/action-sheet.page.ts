@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { ActionSheetController, IonicModule } from '@ionic/angular';
 import { HeaderComponent } from 'src/app/shared/header/header.component';
 
 @Component({
@@ -13,7 +13,41 @@ import { HeaderComponent } from 'src/app/shared/header/header.component';
 })
 export class ActionSheetPage implements OnInit {
 
-  constructor() { }
+  constructor(private actionSheetCtrl: ActionSheetController) {}
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Actions',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: 'trash-outline',
+          cssClass: 'rojo',
+          data: {
+            action: 'delete',
+          },
+        },
+        {
+          text: 'Share',
+          icon: 'share-social-outline',
+          data: {
+            action: 'share',
+          },
+        },
+        {
+          text: 'Cancel',
+          icon: 'close-outline',
+          role: 'cancel',
+          data: {
+            action: 'cancel',
+          },
+        },
+      ],
+    });
+
+    await actionSheet.present();
+  }
 
   ngOnInit() {
   }

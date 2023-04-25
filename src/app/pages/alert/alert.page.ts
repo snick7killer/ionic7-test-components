@@ -13,9 +13,41 @@ import { HeaderComponent } from 'src/app/shared/header/header.component';
 })
 export class AlertPage implements OnInit {
 
+  handlerMessage = '';
+  roleMessage = '';
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  public alertButtons = [
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      handler: () => { this.handlerMessage = 'Alert canceled'; }
+    },
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => { this.handlerMessage = 'Alert confirmed'; }
+    }
+  ];
+
+  public alertButtons2 = [
+    {
+      text: 'Cancel 2',
+      role: 'cancel',
+    },
+    {
+      text: 'OK 2',
+      role: 'confirm',
+    }
+  ];
+
+  setResult(ev:any) {
+    this.roleMessage = `Dismissed with role: ${ev.detail.role}`;
+  }
+
 
 }
